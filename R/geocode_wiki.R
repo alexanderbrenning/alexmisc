@@ -18,7 +18,10 @@
 geocode_wiki_town <- function(name, wiki = "de", digits = 5, delay = 0.1) {
   lat <- lon <- NA
   if (!failed(try(
-    res <- xml2::read_html(paste0("http://de.wikipedia.org/wiki/", name))
+    res <- xml2::read_html(paste0("http://",
+                                  tolower(wiki),
+                                  ".wikipedia.org/wiki/",
+                                  name))
   ))) {
     try(lat <- res %>% rvest::html_node("span .latitude") %>%
           rvest::html_text() %>% as.numeric() %>% round(digits = digits)
