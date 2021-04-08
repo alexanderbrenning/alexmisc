@@ -1,0 +1,26 @@
+Package: alexmisc
+Title: Alexander Brenning's Miscellaneous Functions
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Alexander",
+           family = "Brenning",
+           role = c("aut", "cre"),
+           email = "alexander.brenning@uni-jena.de",
+           comment = c(ORCID = "0000-0001-6640-679X"))
+Description: This is a collection of various utility functions
+  are supposed to make life easier: Making code more 
+  robust and try-catch calls more convenient; reading 
+  web pages in a more robust way; and there's more to come, 
+  I just need to harvest utility functions
+  from a variet of projects...
+License: GPL (>= 3)
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1.9001
+Suggests: 
+    testthat (>= 3.0.0)
+Imports:
+    purrr
+Depends: 
+    R (>= 2.10)
