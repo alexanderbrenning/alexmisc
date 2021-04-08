@@ -37,6 +37,6 @@ devtools::install_github("alexanderbrenning/alexmisc")
 This is a basic example which shows you how to solve a common problem:
 
 ``` r
-#library(alexmisc)
+# library(alexmisc)
 ## basic example code
 ```
