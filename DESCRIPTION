@@ -21,6 +21,11 @@ RoxygenNote: 7.1.1.9001
 Suggests: 
     testthat (>= 3.0.0)
 Imports:
-    purrr
+    rvest,
+    purrr,
+    dplyr,
+    stringi,
+    retry,
+    magrittr
 Depends: 
     R (>= 2.10)

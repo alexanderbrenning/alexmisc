@@ -16,6 +16,7 @@
 #' geocode_wiki_town("Halle_(Saale)") # with underscore
 #' geocode_wiki_town("Nürnberg") # with umlaut
 geocode_wiki_town <- function(name, wiki = "de", digits = 5, delay = 0.1) {
+  require("magrittr")
   lat <- lon <- NA
   if (!failed(try(
     res <- xml2::read_html(paste0("http://",
