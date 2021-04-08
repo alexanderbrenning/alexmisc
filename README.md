@@ -37,6 +37,20 @@ devtools::install_github("alexanderbrenning/alexmisc")
 This is a basic example which shows you how to solve a common problem:
 
 ``` r
-# library(alexmisc)
+library(alexmisc)
+replace_umlaute("Jenalöbnitz")
+#> [1] "Jenaloebnitz"
+failed(try(sqrt("a"), silent = TRUE))
+#> [1] TRUE
+geocode_wiki_town("Jena")
+#> Loading required package: magrittr
+#> $name
+#> [1] "Jena"
+#> 
+#> $latitude
+#> [1] 50.92721
+#> 
+#> $longitude
+#> [1] 11.58636
 ## basic example code
 ```
