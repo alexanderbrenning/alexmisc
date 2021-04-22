@@ -113,7 +113,7 @@ try_read_html <- function(expose_url,
                           max_tries = 2, interval = max(delay_before, delay_after),
                           ...) {
   if (delay_before > 0)
-    Sys.sleep(delay_after)
+    Sys.sleep(delay_before)
   expose <- try_retry(xml2::read_html(expose_url, ...),
                       max_tries = max_tries,
                       interval = interval)
