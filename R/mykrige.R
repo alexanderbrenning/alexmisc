@@ -107,7 +107,7 @@ svgm_spherical <- function(x, range, psill, nugget = 0) {
   y <- rep(sill, length(x))
   y[ x == 0 ] <- 0
   sel <- (x > 0) & (x < range)
-  y[sel] <- sill * (1.5*x/range - 0.5*(x/range)^3)
+  y[sel] <- sill * (1.5*x[sel]/range - 0.5*(x[sel]/range)^3)
   y
 }
 
