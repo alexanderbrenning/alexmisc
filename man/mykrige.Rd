@@ -15,9 +15,15 @@ mykrige(
 }
 \arguments{
 \item{formula, data, locations}{See \code{\link[gstat:krige]{gstat::krige()}}.}
+
+\item{range}{Range parameter of spherical semivariogram}
+
+\item{nsratio}{Nugget-to-sill ratio of spherical semivariogram}
+
+\item{fixed}{Determines if the semivariogram parameters should be fixed or not; default: \code{FALSE}.}
 }
 \value{
-\code{mykrige} returns a list with the formula and data, i.e. an object of class \code{mykrige}. The predict method return only the predicted values as a numeric vector.
+\code{mykrige} returns a list with the formula and data, i.e. an object of class \code{mykrige}.
 }
 \description{
 Kriging interpolation wrapper

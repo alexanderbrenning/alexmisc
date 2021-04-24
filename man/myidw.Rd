@@ -2,29 +2,26 @@
 % Please edit documentation in R/mykrige.R
 \name{myidw}
 \alias{myidw}
-\alias{predict.myidw}
-\alias{predict.mykrige}
+\alias{myidw0}
 \title{IDW interpolation wrapper}
 \usage{
 myidw(formula, data)
 
-\method{predict}{myidw}(object, newdata, locations = ~x + y, nmax = 7, ...)
-
-\method{predict}{mykrige}(object, newdata, nmax = 7, ...)
+myidw0(formula, data)
 }
 \arguments{
-\item{formula, data, locations}{See \code{\link[gstat:krige]{gstat::idw()}}.}
+\item{formula, data}{See \code{\link[gstat:krige]{gstat::idw()}}.}
+
+\item{object, locations, nmax, ...}{See \code{\link[gstat:krige]{gstat::idw()}}}
 }
 \value{
-\code{myidw} returns a list with the formula and data, i.e. an object of class \code{myidw}. The predict method return only the predicted values as a numeric vector.
+\code{myidw} returns a list with the formula and data, i.e. an object of class \code{myidw}.
 }
 \description{
 IDW interpolation wrapper
 }
-\section{Methods (by generic)}{
+\section{Functions}{
 \itemize{
-\item \code{predict}: Predict method for \code{myidw} objects.
-
-\item \code{predict}: Predict method for \code{mykrige} objects.
+\item \code{myidw0}: IDW without trend variables
 }}
 
