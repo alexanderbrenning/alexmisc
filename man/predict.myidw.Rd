@@ -4,7 +4,7 @@
 \alias{predict.myidw}
 \title{Predict method for \code{myidw} objects.}
 \usage{
-\method{predict}{myidw}(object, newdata, locations = ~x + y, nmax = 30, ...)
+\method{predict}{myidw}(object, newdata, locations = ~x + y, nmax = object$nmax, ...)
 }
 \arguments{
 \item{object, newdata, locations, nmax}{See \code{\link[gstat:krige]{gstat::idw()}}.}

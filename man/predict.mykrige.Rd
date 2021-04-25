@@ -4,10 +4,10 @@
 \alias{predict.mykrige}
 \title{Predict method for \code{mykrige} objects}
 \usage{
-\method{predict}{mykrige}(object, newdata, nmax = 30, ...)
+\method{predict}{mykrige}(object, newdata, nmax = object$nmax, ...)
 }
 \arguments{
-\item{object, newdata, nmax, ...}{See \code{\link[gstat:krige]{gstat::krige()}}.}
+\item{object, newdata, ...}{See \code{\link[gstat:krige]{gstat::krige()}}.}
 }
 \value{
 The predict method return only the predicted values as a numeric vector.

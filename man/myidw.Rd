@@ -5,9 +5,9 @@
 \alias{myidw0}
 \title{IDW interpolation wrapper}
 \usage{
-myidw(formula, data)
+myidw(formula, data, nmax = Inf)
 
-myidw0(formula, data)
+myidw0(formula, data, nmax = Inf)
 }
 \arguments{
 \item{formula, data}{See \code{\link[gstat:krige]{gstat::idw()}}.}

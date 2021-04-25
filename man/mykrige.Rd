@@ -8,19 +8,28 @@ mykrige(
   formula,
   data,
   locations = ~x + y,
-  range = 500,
+  svgm = "Sph",
+  range = NA,
   nsratio = 0.25,
-  fixed = FALSE
+  fixed = FALSE,
+  fit.ranges = TRUE,
+  nmax = Inf
 )
 }
 \arguments{
 \item{formula, data, locations}{See \code{\link[gstat:krige]{gstat::krige()}}.}
+
+\item{svgm}{Semivariogram model, e.g. \code{"Sph"}}
 
 \item{range}{Range parameter of spherical semivariogram}
 
 \item{nsratio}{Nugget-to-sill ratio of spherical semivariogram}
 
 \item{fixed}{Determines if the semivariogram parameters should be fixed or not; default: \code{FALSE}.}
+
+\item{fit.ranges}{When fitting the semivariogram (i.e. \code{fixed} is \code{FALSE}), fit the range parameter (\code{TRUE}, default), or not.}
+
+\item{nmax}{Maximum number of neighbours to be used for interpolation.}
 }
 \value{
 \code{mykrige} returns a list with the formula and data, i.e. an object of class \code{mykrige}.
