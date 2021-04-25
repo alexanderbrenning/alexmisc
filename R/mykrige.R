@@ -29,7 +29,7 @@ myidw0 <- function(formula, data) {
 #' @return  The predict method returns only the predicted values as a numeric vector.
 #' @export
 predict.myidw <- function(object, newdata, locations = ~x+y,
-                          nmax = 30, ...) {
+                          nmax = Inf, ...) {
   if (nrow(newdata) == 0) return(numeric())
   res <- gstat::idw(formula = object$formula,
                     locations = locations,
@@ -78,7 +78,7 @@ mykrige <- function(formula, data, locations = ~x+y,
 #' @return The predict method return only the predicted values as a numeric vector.
 #' @export
 predict.mykrige <- function(object, newdata,
-                            nmax = 30, ...) {
+                            nmax = Inf, ...) {
   if (nrow(newdata) == 0) return(numeric())
   res <- gstat::krige(formula = object$formula,
                       locations = object$locations,
@@ -107,7 +107,7 @@ svgm_spherical <- function(x, range, psill, nugget = 0) {
   y <- rep(sill, length(x))
   y[ x == 0 ] <- 0
   sel <- (x > 0) & (x < range)
-  y[sel] <- sill * (1.5*x[sel]/range - 0.5*(x[sel]/range)^3)
+  y[sel] <- psill * (1.5*x[sel]/range - 0.5*(x[sel]/range)^3) + nugget
   y
 }
 
