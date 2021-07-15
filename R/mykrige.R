@@ -48,16 +48,17 @@ predict.myidw <- function(object, newdata, locations = ~x+y,
 #' @param formula,data,locations See [gstat::krige()].
 #' @param svgm Semivariogram model, e.g. `"Sph"`
 #' @param range Range parameter of spherical semivariogram
-#' @param nsratio Nugget-to-sill ratio of spherical semivariogram
+#' @param nsratio Nugget-to-sill ratio of spherical semivariogram; more precisely, an error variance is modeled instead of a nugget effect
 #' @param fixed Determines if the semivariogram parameters should be fixed or not; default: `FALSE`.
 #' @param fit.ranges When fitting the semivariogram (i.e. `fixed` is `FALSE`), fit the range parameter (`TRUE`, default), or not.
 #' @param nmax Maximum number of neighbours to be used for interpolation.
-#'
+#' @param cressie Use Cressie's robust estimator
 #' @return `mykrige` returns a list with the formula and data, i.e. an object of class `mykrige`.
 #' @export
 mykrige <- function(formula, data, locations = ~x+y,
                     svgm = "Sph",
                     range = NA, nsratio = 0.25,
+                    cressie = TRUE,
                     fixed = FALSE,
                     fit.ranges = TRUE,
                     nmax = Inf) {
@@ -65,9 +66,10 @@ mykrige <- function(formula, data, locations = ~x+y,
   vm <- vgm(psill = guess_sill * (1 - nsratio),
             model = svgm,
             range = range,
-            nugget = guess_sill * nsratio)
+            Err = guess_sill * nsratio)
   if (!fixed) {
-    v <- variogram(formula, locations = locations, data = data)
+    v <- variogram(formula, locations = locations, data = data,
+                   cressie = cressie)
     vm <- fit.variogram(v, vm, fit.ranges = fit.ranges)
   }
   m <- list(formula = formula, data = data, locations = locations,

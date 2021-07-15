@@ -11,6 +11,7 @@ mykrige(
   svgm = "Sph",
   range = NA,
   nsratio = 0.25,
+  cressie = TRUE,
   fixed = FALSE,
   fit.ranges = TRUE,
   nmax = Inf
@@ -23,7 +24,9 @@ mykrige(
 
 \item{range}{Range parameter of spherical semivariogram}
 
-\item{nsratio}{Nugget-to-sill ratio of spherical semivariogram}
+\item{nsratio}{Nugget-to-sill ratio of spherical semivariogram; more precisely, an error variance is modeled instead of a nugget effect}
+
+\item{cressie}{Use Cressie's robust estimator}
 
 \item{fixed}{Determines if the semivariogram parameters should be fixed or not; default: \code{FALSE}.}
 

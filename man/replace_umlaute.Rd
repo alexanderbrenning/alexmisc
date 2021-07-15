@@ -16,6 +16,6 @@ Character string with umlaute replaced
 Replace German umlaute with \code{"ae"} and the like
 }
 \examples{
-replace_umlaute("JenalÃ¶bnitz")
-replace_umlaute("JenaprieÃŸnitz")
+replace_umlaute("Jenalöbnitz")
+replace_umlaute("Jenaprießnitz")
 }

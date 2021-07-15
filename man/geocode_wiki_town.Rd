@@ -33,5 +33,5 @@ A quick and dirty attempt at geocoding places using Wikipedia.
 \examples{
 geocode_wiki_town("Jena")
 geocode_wiki_town("Halle_(Saale)") # with underscore
-geocode_wiki_town("NÃ¼rnberg") # with umlaut
+geocode_wiki_town("Nürnberg") # with umlaut
 }
