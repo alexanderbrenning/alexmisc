@@ -10,13 +10,16 @@
 #' @return A list containing the `name`, `latitude` and `longitude` of the requested town.
 #' Latitude and longitude are `NA` if the attempt failed.
 #' @export
+#' @import magrittr
+#' @importFrom xml2 read_html
+#' @importFrom rvest html_text
 #'
 #' @examples
 #' geocode_wiki_town("Jena")
 #' geocode_wiki_town("Halle_(Saale)") # with underscore
 #' geocode_wiki_town("Nürnberg") # with umlaut
 geocode_wiki_town <- function(name, wiki = "de", digits = 5, delay = 0.1) {
-  require("magrittr")
+  #require("magrittr")
   lat <- lon <- NA
   if (!failed(try(
     res <- xml2::read_html(paste0("http://",
@@ -44,6 +47,9 @@ geocode_wiki_town <- function(name, wiki = "de", digits = 5, delay = 0.1) {
 
 #' @describeIn geocode_wiki_town Iterate `geocode_wiki_town` over multiple towns
 #' @export
+#' @import magrittr
+#' @importFrom purrr map
+#' @importFrom dplyr bind_rows
 geocode_wiki_towns <- function(names, wiki = "de", digits = 5, delay = 1) {
   names %>% purrr::map(geocode_wiki_town,
                        wiki = wiki,

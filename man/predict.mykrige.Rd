@@ -7,7 +7,11 @@
 \method{predict}{mykrige}(object, newdata, nmax = object$nmax, ...)
 }
 \arguments{
-\item{object, newdata, ...}{See \code{\link[gstat:krige]{gstat::krige()}}.}
+\item{object, newdata}{See \code{\link[gstat:krige]{gstat::krige()}}.}
+
+\item{nmax}{number of nearest observations to be used in local kriging; defaults to value specified when creating the \code{mykrige} object.}
+
+\item{...}{See \code{\link[gstat:krige]{gstat::idw()}}}
 }
 \value{
 The predict method return only the predicted values as a numeric vector.

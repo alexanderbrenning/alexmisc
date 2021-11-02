@@ -17,9 +17,11 @@ download_new_wiki_image(
 \item{destfile}{Destination folder and file name for saving image. If \code{NULL} (default), use name of Wikipedia page.}
 
 \item{destfolder}{Destination folder and file name for saving image. If \code{NULL} (default), use name of Wikipedia page.}
+
+\item{...}{additional arguments passed to \code{\link[=download_wiki_image]{download_wiki_image()}}.}
 }
 \value{
-A list containing image metadata, as returned by \link{download_wiki_image}.
+A list containing image metadata, as returned by \code{\link[=download_wiki_image]{download_wiki_image()}}.
 }
 \description{
 Download Wikipedia image if it doesn't already exist

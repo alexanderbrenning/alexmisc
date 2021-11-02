@@ -1,9 +1,9 @@
 #' IDW interpolation wrapper
 #'
 #' @param formula,data See [gstat::idw()].
-#' @param object,locations,nmax,... See [gstat::idw()]
+#' @param nmax See [gstat::idw()]
 #'
-#' @return `myidw` returns a list with the formula and data, i.e. an object of class `myidw`.
+#' @return `myidw()` returns a list with the formula and data, i.e. an object of class `myidw`.
 #' @export
 myidw <- function(formula, data, nmax = Inf) {
   m <- list(formula = formula, data = data, nmax = nmax)
@@ -14,8 +14,9 @@ myidw <- function(formula, data, nmax = Inf) {
 
 #' @describeIn myidw IDW without trend variables
 #' @export
+#' @importFrom stats as.formula
 myidw0 <- function(formula, data, nmax = Inf) {
-  m <- list(formula = as.formula(paste(all.vars(formula)[1], "~ 1")), data = data, nmax = nmax)
+  m <- list(formula = stats::as.formula(paste(all.vars(formula)[1], "~ 1")), data = data, nmax = nmax)
   class(m) <- "myidw"
   m
 }
@@ -25,9 +26,11 @@ myidw0 <- function(formula, data, nmax = Inf) {
 #' Predict method for `myidw` objects.
 #'
 #' @param object,newdata,locations,nmax See [gstat::idw()].
+#' @param ... See [gstat::idw()].
 #'
 #' @return  The predict method returns only the predicted values as a numeric vector.
 #' @export
+#' @importFrom gstat idw
 predict.myidw <- function(object, newdata, locations = ~x+y,
                           nmax = object$nmax, ...) {
   if (nrow(newdata) == 0) return(numeric())
@@ -55,6 +58,8 @@ predict.myidw <- function(object, newdata, locations = ~x+y,
 #' @param cressie Use Cressie's robust estimator
 #' @return `mykrige` returns a list with the formula and data, i.e. an object of class `mykrige`.
 #' @export
+#' @importFrom gstat vgm fit.variogram variogram
+#' @importFrom stats var
 mykrige <- function(formula, data, locations = ~x+y,
                     svgm = "Sph",
                     range = NA, nsratio = 0.25,
@@ -62,7 +67,7 @@ mykrige <- function(formula, data, locations = ~x+y,
                     fixed = FALSE,
                     fit.ranges = TRUE,
                     nmax = Inf) {
-  guess_sill <- var(data[, all.vars(formula)[1]]) * 0.5
+  guess_sill <- stats::var(data[, all.vars(formula)[1]]) * 0.5
   vm <- vgm(psill = guess_sill * (1 - nsratio),
             model = svgm,
             range = range,
@@ -81,10 +86,13 @@ mykrige <- function(formula, data, locations = ~x+y,
 
 #' Predict method for `mykrige` objects
 #'
-#' @param object,newdata,... See [gstat::krige()].
+#' @param object,newdata See [gstat::krige()].
+#' @param nmax number of nearest observations to be used in local kriging; defaults to value specified when creating the `mykrige` object.
+#' @param ... See [gstat::idw()]
 #'
 #' @return The predict method return only the predicted values as a numeric vector.
 #' @export
+#' @importFrom gstat krige
 predict.mykrige <- function(object, newdata,
                             nmax = object$nmax, ...) {
   if (nrow(newdata) == 0) return(numeric())

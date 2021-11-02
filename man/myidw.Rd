@@ -12,10 +12,10 @@ myidw0(formula, data, nmax = Inf)
 \arguments{
 \item{formula, data}{See \code{\link[gstat:krige]{gstat::idw()}}.}
 
-\item{object, locations, nmax, ...}{See \code{\link[gstat:krige]{gstat::idw()}}}
+\item{nmax}{See \code{\link[gstat:krige]{gstat::idw()}}}
 }
 \value{
-\code{myidw} returns a list with the formula and data, i.e. an object of class \code{myidw}.
+\code{myidw()} returns a list with the formula and data, i.e. an object of class \code{myidw}.
 }
 \description{
 IDW interpolation wrapper

@@ -8,6 +8,8 @@
 }
 \arguments{
 \item{object, newdata, locations, nmax}{See \code{\link[gstat:krige]{gstat::idw()}}.}
+
+\item{...}{See \code{\link[gstat:krige]{gstat::idw()}}.}
 }
 \value{
 The predict method returns only the predicted values as a numeric vector.

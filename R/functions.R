@@ -13,6 +13,7 @@
 #'
 #' @return Character string with umlaute replaced
 #' @export
+#' @importFrom stringi stri_replace_all_fixed
 #'
 #' @examples
 #' replace_umlaute("Jenalöbnitz")
@@ -53,6 +54,7 @@ failed <- function(x) {
 #' `"try-error"`.
 #' @seealso [try_read_html()]
 #' @export
+#' @importFrom retry retry
 #'
 #' @examples
 #' failed(try_retry(sqrt("a")))
@@ -108,6 +110,7 @@ recursive_file_exists <- function(x, path = ".") {
 #'
 #' @return The result of [xml2::read_html()], or an object of class `"try-error"` in case of error.
 #' @export
+#' @importFrom xml2 read_html
 try_read_html <- function(expose_url,
                           delay_before = 0, delay_after = 1,
                           max_tries = 2, interval = max(delay_before, delay_after),

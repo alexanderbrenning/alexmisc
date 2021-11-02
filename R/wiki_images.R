@@ -12,6 +12,11 @@
 #'
 #' @return Invisible returns a list with metadata such as source URL, author, licence, if possible.
 #' @export
+#' @import stringr
+#' @import rvest
+#' @import dplyr
+#' @importFrom xml2 read_html
+#' @importFrom utils download.file
 #'
 #' @examples
 #' # res <- download_wiki_image("ArcGIS",
@@ -149,7 +154,7 @@ download_wiki_image <- function(name,
       cat("Couldn't find table with image description and source.\n")
   } else {
     # Convert to data.frame - but first column holds names:
-    info_tbl <- info_tbl %>% html_table(fill = TRUE)
+    info_tbl <- info_tbl %>% rvest::html_table(fill = TRUE)
     # Turn it into a named list:
     info <- as.list(info_tbl$X2)
     names(info) <- info_tbl$X1
@@ -210,7 +215,7 @@ download_wiki_image <- function(name,
         "' in folder '", destfolder, "'...\n", sep = "")
 
   # Download the image:
-  download.file(url, mode = "wb",
+  utils::download.file(url, mode = "wb",
                 destfile = file.path(destfolder, destfile),
                 quiet = quiet_download)
   RESULT$destfolder <- destfolder
@@ -235,7 +240,8 @@ download_wiki_image <- function(name,
 #' Download Wikipedia image if it doesn't already exist
 #'
 #' @inheritParams download_wiki_image
-#' @return A list containing image metadata, as returned by [download_wiki_image].
+#' @param ... additional arguments passed to [download_wiki_image()].
+#' @return A list containing image metadata, as returned by [download_wiki_image()].
 #' @export
 download_new_wiki_image <- function(name,
                                     destfile = gsub(" ", "_", name),
@@ -270,6 +276,8 @@ download_new_wiki_image <- function(name,
 #'
 #' @return Markdown code to be included in the document. The function is also called for its side effect of calling [exams::include_supplement()].
 #' @export
+#' @import stringr
+#' @importFrom  exams include_supplement
 include_md_image <- function(file, path = NULL, caption = NULL, default_caption = "",
                              width = NULL, include_suppl = TRUE,
                              fontsize = -2) {
@@ -288,7 +296,7 @@ include_md_image <- function(file, path = NULL, caption = NULL, default_caption 
   }
   if (include_suppl)
     exams::include_supplement(file, dir = path)
-  caption <- caption %>% str_remove_all("\\[") %>% str_remove_all("\\]")
+  caption <- caption %>% stringr::str_remove_all("\\[") %>% stringr::str_remove_all("\\]")
   res <- paste0("![",
                 ifelse(is.null(fontsize), "", paste0('<font size="', fontsize, '">')),
                 caption,
