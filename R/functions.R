@@ -77,6 +77,50 @@ replace_null <- function(x) {
 }
 
 
+#' Replace NULL and NA values
+#'
+#' @param x an object, usually an atomic one
+#' @param y value to be returned if `x` is `NULL`, of length 0,
+#'   or if its first element is `NA`
+#'
+#' @return `y`, if `x` is `NULL`, length 0, or if `x[1]` is `NA`; `x` otherwise.
+#' @export
+#'
+#' @examples
+#' if_missing(NULL, "n/a")
+#' if_missing(NA, "n/a")
+#' if_missing(c(), "n/a")
+#' if_missing("something", "n/a")
+if_missing <- function(x,y) {
+  res <- y
+  if (!is.null(x))
+    if (length(x) >= 1)
+      if (!is.na(x[1]))
+        res <- x
+  return(res)
+}
+
+
+#' Check if object is `NULL` or all `NA`s
+#'
+#' @param x an atomic object or vector
+#'
+#' @return `TRUE`, if `x` is either `NULL` or `NA`; `FALSE` otherwise.
+#' @export
+#'
+#' @examples
+#' is_null_na(NULL)
+#' is_null_na(NA)
+#' is_null_na(c(NA, NA, NA))
+#' is_null_na(c("something", NA))
+is_null_na <- function(x) {
+  y <- is.null(x)
+  if (!y) y <- all(is.na(x))
+  y
+}
+
+
+
 #' Recursive version of `file.exists()`
 #'
 #' @param x File name
